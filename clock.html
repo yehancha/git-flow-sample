@@ -5,7 +5,7 @@
 
   <body>
     <h1>Clock</h1>
-    
+
     <div>
       Time:
     </div>
@@ -19,12 +19,12 @@
     </div>
 
     <div>
-      v1
+      v1.0.1
     </div>
   </body>
 
   <script>
-    document.getElementById("time").innerHTML = new Date();
+    document.getElementById("time").innerHTML = new Date().toTimeString();
     document.getElementById("date").innerHTML = new Date().toDateString();
   </script>
 </html>
