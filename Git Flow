@@ -1,0 +1,125 @@
+Main Branches
+=============
+
+We have two forever branches.
+
+    * master
+    * develop
+
+master branch always contains the latest stable release. develop branch contains the stable features which will be released next.
+
+Supporting Branches
+===================
+
+Other than these main branches, we have 3 types of supporting branches.
+
+    * Feature branches
+    * Release branches
+    * Hotfix branches
+
+Feature Branches
+================
+
+Branch off from: develop
+Merge into: develop
+Naming: feature/my-feature
+
+Starting a new feature:
+
+# Create and checkout the new feature branch
+git checkout -b feature/my-feature develop
+
+Merging stable feature:
+
+# Merge changes into develop branch
+git checkout develop
+git merge --no-ff feature/my-feature
+git push origin develop
+
+# Delete feature branch
+git branch -d feature/my-feature
+git push origin --delete feature/my-feature
+
+If you do not have write permission on develop branch, place a pull-request.
+
+Release Branches
+================
+
+Branch off from: develop
+Merge into: master, develop
+Nameing: release/version-number
+
+Starting a new release:
+
+# Create and checkout the new release branch
+git checkout -b release/version-number
+
+# Commit the new version
+[bump version number in project]
+git commit -a -m "Bump version to new-version"
+
+Merging release:
+
+# Merge release into master
+git checkout master
+git merge --no-ff release/version-number
+git push origin master
+
+# Tag release
+git tag -a v# -m "Tag description"
+git push origin --tags
+
+# Merge release into develop
+git checkout develop
+git merge --no-ff release/version-number
+git push origin develop
+
+# Delete release branch
+git branch -d release/version-number
+git push origin --delete release/version-number
+
+When the develop branch is stable, you are ready for the next release. Make sure you have finalize the type of your release (major, minor, bug-fixes) before you branch off the release branch. Bump up the version as soon as you branch off for the release. Every bug fixes should now go into the release branch rather than onto develop branch. Big features are strictly prohibited on the release branch. They should go on develop branch so will be released with the next release.
+
+Hotfix Branches
+===============
+
+Branch off from: master
+Merge into: master, develop
+Naming: hotfix/version-number
+
+Starting a new hotfix:
+
+# Create and checkout the new hotfix branch
+git checkout -b hotfix/version-number
+
+# Commit the new version
+[bump version number in project]
+git commit -a -m "Bump version to new-version"
+
+Merging hotfix:
+
+# Merge hotfix into master
+git checkout master
+git merge --no-ff hotfix/version-number
+git push origin master
+
+# Tag release
+git tag -a v# -m "Tag description"
+git push origin --tags
+
+# Merge hotfix into develop
+git checkout develop
+git merge --no-ff hotfix/version-number
+git push origin develop
+
+# Delete hotfix branch
+git branch -d hotfix/version-number
+git push origin --delete hotfix/version-number
+
+If there is a fix that cannot wait till the next release, it should go as a hotfix. Make sure you bump the bug-fix number of the version as soon as you branch off the hotfix. If there is a living release branch, make sure whether the hot fix is a nessesity. If it is, merge hotfix into release rather than develop when finishing off.
+
+Important Notes
+===============
+
+    * Make sure you use --no-ff flag when merging to master, develop branches.
+    * Original git-flow post: http://nvie.com/posts/a-successful-git-branching-model/
