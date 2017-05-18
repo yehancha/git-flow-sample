@@ -4,5 +4,27 @@
   </header>
 
   <body>
+    <h1>Clock</h1>
+    
+    <div>
+      Time:
+    </div>
+    <div id="time">
+    </div>
+
+    <div>
+      Date:
+    </div>
+    <div id="date">
+    </div>
+
+    <div>
+      v1
+    </div>
   </body>
+
+  <script>
+    document.getElementById("time").innerHTML = new Date();
+    document.getElementById("date").innerHTML = new Date().toDateString();
+  </script>
 </html>
