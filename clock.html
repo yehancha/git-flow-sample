@@ -18,7 +18,12 @@
   </body>
 
   <script>
-    document.getElementById("time").innerHTML = new Date();
     document.getElementById("date").innerHTML = new Date().toDateString();
+
+    function updateTime() {
+      document.getElementById("time").innerHTML = new Date();
+    }
+
+    setInterval(updateTime, 1000);
   </script>
 </html>
